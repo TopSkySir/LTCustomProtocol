@@ -25,13 +25,13 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
 
 
-  s.source       = { :git => "https://github.com/TopSkySir/LTExtension.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/TopSkySir/LTCustomProtocol.git", :tag => "#{s.version}" }
   s.swift_version = "4.0"
 
 
   s.subspec 'ScrollViewRefresh' do |scrollViewRefresh|
     scrollViewRefresh.ios.deployment_target = '8.0'
-    scrollViewRefresh.source_files = 'LTCustomProtocol/ScrollViewRefresh/*.swift'
+    scrollViewRefresh.source_files = 'Sources/ScrollViewRefresh/*.swift'
     scrollViewRefresh.dependency 'MJRefresh', '~> 3.1.15.3'
   end
 
