@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LTCustomProtocol"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Some custom protocols that speed development."
 
   s.description  = <<-DESC
@@ -33,6 +33,11 @@ Pod::Spec.new do |s|
     scrollViewRefresh.ios.deployment_target = '8.0'
     scrollViewRefresh.source_files = 'Sources/ScrollViewRefresh/*.swift'
     scrollViewRefresh.dependency 'MJRefresh', '~> 3.1.15.3'
+  end
+
+  s.subspec 'RequestStatus' do |requestStatus|
+  	requestStatus.ios.deployment_target = '8.0'
+    requestStatus.source_files = 'Sources/RequestStatus/*.swift'
   end
 
 

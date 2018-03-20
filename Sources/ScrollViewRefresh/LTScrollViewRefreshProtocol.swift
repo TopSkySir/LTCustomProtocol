@@ -75,15 +75,18 @@ public extension LTScrollViewRefreshProtocol {
      顶部刷新 是否隐藏
      */
     func setRefreshHeaderHidden(_ isHidden: Bool) {
-        mj_header.isHidden = isHidden
+        header?.isHidden = isHidden
     }
 
     /**
      底部刷新 是否隐藏
      */
     func setRefreshFooterHidden(_ isHidden: Bool) {
-        mj_footer.isHidden = isHidden
+        footer?.isHidden = isHidden
     }
+
+
+
 }
 
 
@@ -136,6 +139,20 @@ public extension LTScrollViewRefreshProtocol {
         mj_header = nil
         mj_footer = nil
     }
+
+    /**
+     获取Optional mj_header
+     */
+    fileprivate var header: MJRefreshHeader? {
+        return mj_header
+    }
+
+    /**
+     获取Optional mj_footer
+     */
+    fileprivate var footer: MJRefreshFooter? {
+        return mj_footer
+    }
 }
 
 
@@ -146,21 +163,21 @@ public extension LTScrollViewRefreshProtocol {
      开始刷新头部
      */
     func startRefreshHeader() {
-        mj_header.beginRefreshing()
+        header?.beginRefreshing()
     }
 
     /**
      停止刷新头部
      */
     func endRefreshHeader() {
-        mj_header.endRefreshing()
+        header?.endRefreshing()
     }
 
     /**
      开始刷新底部
      */
     func startRefreshFooter() {
-        mj_footer.beginRefreshing()
+        footer?.beginRefreshing()
     }
 
     /**
@@ -168,9 +185,9 @@ public extension LTScrollViewRefreshProtocol {
      */
     func endRefreshFooter(isEnd: Bool = false) -> Void {
         if isEnd {
-            mj_footer.endRefreshingWithNoMoreData()
+            footer?.endRefreshingWithNoMoreData()
         } else {
-            mj_footer.endRefreshing()
+            footer?.endRefreshing()
         }
     }
 
@@ -178,8 +195,8 @@ public extension LTScrollViewRefreshProtocol {
      重置底部
      */
     func resetRefreshFooter() {
-        mj_footer.resetNoMoreData()
-        mj_footer.isHidden = false
+        footer?.resetNoMoreData()
+        footer?.isHidden = false
     }
 
 
