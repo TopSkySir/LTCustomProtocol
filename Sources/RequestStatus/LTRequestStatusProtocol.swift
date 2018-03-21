@@ -42,22 +42,22 @@ public protocol LTRequestStatusProtocol: class {
      */
 
     //初始化
-    func shouldCheckInitRequest() -> Bool
-    func checkInitRequest() -> Bool
-    func startInitRequest()
-    func endInitRequest()
+    func shouldCheckInitStatus() -> Bool
+    func checkInitStatus() -> Bool
+    func startInitStatus()
+    func endInitStatus()
 
     //空状态
-    func shouldCheckResponseEmpty() -> Bool
-    func checkResponseEmpty() -> Bool
-    func startResponseEmpty()
-    func endResponseEmpty()
+    func shouldCheckEmptyStatus() -> Bool
+    func checkEmptyStatus() -> Bool
+    func startEmptyStatus()
+    func endEmptyStatus()
 
     //错误状态
-    func shouldCheckResponseError() -> Bool
-    func checkResponseError(_ err: DataErrorType?) -> Bool
-    func startResponseError(_ err: DataErrorType?)
-    func endResponseError()
+    func shouldCheckErrorStatus() -> Bool
+    func checkErrorStatus(_ err: DataErrorType?) -> Bool
+    func startErrorStatus(_ err: DataErrorType?)
+    func endErrorStatus()
 }
 
 // MARK: - 请求
@@ -118,28 +118,28 @@ public extension LTRequestStatusProtocol {
     /**
      是否检查 初始化状态
      */
-    func shouldCheckInitRequest() -> Bool {
+    func shouldCheckInitStatus() -> Bool {
         return true
     }
 
     /**
      检查 初始化状态
      */
-    func checkInitRequest() -> Bool {
+    func checkInitStatus() -> Bool {
         return isInitRequest || dataSource == nil
     }
 
     /**
      开启 初始化状态
      */
-    func startInitRequest() {
+    func startInitStatus() {
 
     }
 
     /**
      结束 初始化状态
      */
-    func endInitRequest() {
+    func endInitStatus() {
 
     }
 
@@ -147,9 +147,9 @@ public extension LTRequestStatusProtocol {
      设置 初始化状态
      */
     internal func setInitStatus() {
-        if shouldCheckInitRequest() && checkInitRequest() {
+        if shouldCheckInitStatus() && checkInitStatus() {
             setIsInitRequest(true)
-            startInitRequest()
+            startInitStatus()
         }
     }
 
@@ -158,7 +158,7 @@ public extension LTRequestStatusProtocol {
      */
     internal func cleanInitStatus() {
         if isRealInitRequest {
-            endInitRequest()
+            endInitStatus()
             setIsInitRequest(false)
         }
     }
@@ -171,7 +171,7 @@ public extension LTRequestStatusProtocol {
      是否是初始化请求
      */
     var isInitRequest: Bool {
-        guard shouldCheckInitRequest() else {
+        guard shouldCheckInitStatus() else {
             return false
         }
 
@@ -200,28 +200,28 @@ public extension LTRequestStatusProtocol {
     /**
      是否检查 空状态
      */
-    func shouldCheckResponseEmpty() -> Bool {
+    func shouldCheckEmptyStatus() -> Bool {
         return true
     }
 
     /**
      检查 空状态
      */
-    func checkResponseEmpty() -> Bool {
+    func checkEmptyStatus() -> Bool {
         return dataSource == nil
     }
 
     /**
      开启 空状态
      */
-    func startResponseEmpty() {
+    func startEmptyStatus() {
 
     }
 
     /**
      结束 空状态
      */
-    func endResponseEmpty() {
+    func endEmptyStatus() {
 
     }
 
@@ -229,9 +229,9 @@ public extension LTRequestStatusProtocol {
      设置 是否是空状态
      */
     internal func setResponseEmptyStatus() {
-        if shouldCheckResponseEmpty() && checkResponseEmpty() {
+        if shouldCheckEmptyStatus() && checkEmptyStatus() {
             setIsResponseEmpty(true)
-            startResponseEmpty()
+            startEmptyStatus()
         }
     }
 
@@ -241,7 +241,7 @@ public extension LTRequestStatusProtocol {
      */
     internal func cleanResponseEmptyStatus() {
         if isResponseEmpty {
-            endResponseEmpty()
+            endEmptyStatus()
             setIsResponseEmpty(false)
         }
     }
@@ -251,7 +251,7 @@ public extension LTRequestStatusProtocol {
      存储
      */
     var isResponseEmpty: Bool {
-        guard shouldCheckResponseEmpty() else {
+        guard shouldCheckEmptyStatus() else {
             return false
         }
         return getAssociateBoolValue(&LTRequestStatusKey.isResponseEmpty)
@@ -270,28 +270,28 @@ public extension LTRequestStatusProtocol {
     /**
      是否检测 错误状态
      */
-    func shouldCheckResponseError() -> Bool {
+    func shouldCheckErrorStatus() -> Bool {
         return true
     }
 
     /**
      检测 错误状态
      */
-    func checkResponseError(_ err: DataErrorType?) -> Bool {
+    func checkErrorStatus(_ err: DataErrorType?) -> Bool {
         return true
     }
 
     /**
      开启 错误状态
      */
-    func startResponseError(_ err: DataErrorType?) {
+    func startErrorStatus(_ err: DataErrorType?) {
 
     }
 
     /**
      关闭 错误状态
      */
-    func endResponseError() {
+    func endErrorStatus() {
 
     }
 
@@ -299,9 +299,9 @@ public extension LTRequestStatusProtocol {
      设置 错误状态
      */
     internal func setResponseErrorStatus(_ err: DataErrorType?) {
-        if shouldCheckResponseError() && checkResponseError(err) {
+        if shouldCheckErrorStatus() && checkErrorStatus(err) {
             setIsResponseError(true)
-            startResponseError(err)
+            startErrorStatus(err)
         }
     }
 
@@ -310,7 +310,7 @@ public extension LTRequestStatusProtocol {
      */
     internal func cleanResponseErrorStatus() {
         if isResponseError {
-            endResponseError()
+            endErrorStatus()
             setIsResponseError(false)
         }
     }
@@ -319,7 +319,7 @@ public extension LTRequestStatusProtocol {
      存储
      */
     var isResponseError: Bool {
-        guard shouldCheckResponseError() else {
+        guard shouldCheckErrorStatus() else {
             return false
         }
         return getAssociateBoolValue(&LTRequestStatusKey.isResponseError)
